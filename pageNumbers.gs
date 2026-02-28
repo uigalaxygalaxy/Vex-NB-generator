@@ -16,7 +16,7 @@ function notebook() {
     To find coordinates for each element, create a slide with JUST the element you're tryna to find. Then go to Extensions > App Script > and then run this code: It will read the coordinates of each element and log it.
 
     const slideShow = SlidesApp.getActivePresentation();
-    for (let q = 10; q < slideShow.getSlides().length; q++) {
+    for (let q = 1; q < slideShow.getSlides().length; q++) {
         let slide = SlidesApp.getActivePresentation().getSlides()[q];
         let elements = slide.getPageElements();
                 elements.forEach(element => {
@@ -31,7 +31,21 @@ if ur a sloppy bum increase ur tolerance (please be consistent with your placeme
 Default ToC placement is like this:
 Page Num (with color) | Title (with link) | Iteration | Date
 
+make sure you have enough table of contents tables before-hand, it will error and stop early but wont do anything bad 
+
+We DO NOT GENERATE ANYTHING. Soo:
+
+The page numbers will ONLY INCREMENT if the Page Number ELEMENT EXISTS. 
+
+Copy and paste A LOT OF YOUR TABLE OF CONTENT PAGES BEFORE HAND.
+
+the script also changes the page number elements btw
+
+
+
 */
+
+    let pagesToSkip = 10; // how many pages before the script starts looking for page numbers, title, date, etc. (so you can have a cover page and stuff without it breaking)
 
     let pageNumberCoords = {
         left: 532,
@@ -75,7 +89,7 @@ Page Num (with color) | Title (with link) | Iteration | Date
         }
     }
 
-    let ToCDimensions = {
+    let ToCDimensions = { //how much row and column in each table of content page
         rows: 22,
         columns: 4
     }
@@ -104,7 +118,7 @@ Page Num (with color) | Title (with link) | Iteration | Date
         id: ''
     }]
 
-    for (let q = 10; q < slideShow.getSlides().length; q++) {
+    for (let q = pagesToSkip; q < slideShow.getSlides().length; q++) {
         let slide = SlidesApp.getActivePresentation().getSlides()[q];
 
         let elements = slide.getPageElements();
@@ -115,8 +129,6 @@ Page Num (with color) | Title (with link) | Iteration | Date
         let iteration = '';
         let slideID = slide.getObjectId();
         elements.forEach(element => {
-
-            console.log(`Checking element on Slide ${q + 1} at (${element.getLeft()}, ${element.getTop()}) of type ${element.getPageElementType()}`);
 
 
 

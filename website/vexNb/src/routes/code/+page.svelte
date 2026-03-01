@@ -1,4 +1,10 @@
-function notebook() {
+<script>
+	import { goto } from '$app/navigation';
+	import { codeToHtml } from 'shiki';
+
+	let highlightedCode = '';
+
+	let code = `function notebook() {
 
     /* HOW TO USE THIS SCRIPT:
 
@@ -20,7 +26,7 @@ function notebook() {
         let slide = SlidesApp.getActivePresentation().getSlides()[q];
         let elements = slide.getPageElements();
                 elements.forEach(element => {
-    console.log(`Checking element on Slide ${q + 1} at (${element.getLeft()}, ${element.getTop()}) of type ${element.getPageElementType()}`);
+    console.log(\`Checking element on Slide \${q + 1} at (\${element.getLeft()}, \${element.getTop()}) of type \${element.getPageElementType()}\`);
 });
 }
 
@@ -151,7 +157,7 @@ the script also changes the page number elements btw
 
 
             if (Math.abs(element.getLeft() - pageNumberCoords.left) < pageNumberCoords.tolerance.left && Math.abs(element.getTop() - pageNumberCoords.top) < pageNumberCoords.tolerance.top) {
-                console.log(`Found page number element on Slide ${q + 1} at (${element.getLeft()}, ${element.getTop()})`);
+                console.log(\`Found page number element on Slide \${q + 1} at (\${element.getLeft()}, \${element.getTop()})\`);
                 currentPage++;
                 if (element.asShape && element.asShape().getText) {
                     element.asShape().getText().setText(currentPage.toString());
@@ -185,15 +191,15 @@ the script also changes the page number elements btw
 
         });
 
-        console.log(`Slide ${q + 1}: Title: ${title}, Date: ${date}, ID: ${slideID}, Color: ${color}, Iteration: ${iteration}, Page Element Found: ${!!pageElement}`);
+        console.log(\`Slide \${q + 1}: Title: \${title}, Date: \${date}, ID: \${slideID}, Color: \${color}, Iteration: \${iteration}, Page Element Found: \${!!pageElement}\`);
 
         if (pageElement) {
 
-            if (!title) title = `Couldn't find title :c`;
-            if (!date) date = `Can't find ;-;`;
+            if (!title) title = \`Couldn't find title :c\`;
+            if (!date) date = \`Can't find ;-;\`;
             if (!color) color = rgb(255, 255, 255);
-            if (!iteration) iteration = `Can't find :P`;
-            if (!slideID) slideID = `g3c7d2831742_1_3`;
+            if (!iteration) iteration = \`Can't find :P\`;
+            if (!slideID) slideID = \`g3c7d2831742_1_3\`;
 
             let pastEntry = tableOfContents[tableOfContents.length - 1];
             let pastTitle = tableOfContents[tableOfContents.length - 1]?.title;
@@ -238,7 +244,7 @@ the script also changes the page number elements btw
 
                             let pageString = (entry.pageStart === entry.pageEnd)
                                 ? entry.pageStart.toString()
-                                : `${entry.pageStart}-${entry.pageEnd}`;
+                                : \`\${entry.pageStart}-\${entry.pageEnd}\`;
 
                             table.getCell(j + 1, pageNumberColumn).getText().setText(pageString);
 
@@ -249,12 +255,12 @@ the script also changes the page number elements btw
                             }
 
                             if (includeTitle) table.getCell(j + 1, titleColumn).getText().setText(entry.title);
-                            if (includeColor) table.getCell(j + 1, titleColumn).getText().getTextStyle().setLinkUrl(`#slide=id.${entry.id}`);
+                            if (includeColor) table.getCell(j + 1, titleColumn).getText().getTextStyle().setLinkUrl(\`#slide=id.\${entry.id}\`);
                             if (includeIteration) table.getCell(j + 1, iterationColumn).getText().setText(entry.iteration);
                             if (includeDate) table.getCell(j + 1, dateColumn).getText().setText(entry.date);
 
 
-                            console.log(`Page: ${entry.page}, Color: ${entry.color}, Title: ${entry.title}, Date: ${entry.date}`);
+                            console.log(\`Page: \${entry.page}, Color: \${entry.color}, Title: \${entry.title}, Date: \${entry.date}\`);
 
                         }
                     }
@@ -263,5 +269,73 @@ the script also changes the page number elements btw
         });
     }
 }
+`;
 
+	async function highlight() {
+		highlightedCode = await codeToHtml(code, {
+			lang: 'javascript',
+			theme: 'gruvbox-dark-medium'
+		});
+	}
 
+	highlight();
+</script>
+
+<div
+	class="mb-4 flex w-screen justify-center"
+	onclick={() => goto('/')}
+	aria-label="Go back to home page"
+	role="button"
+	tabindex="0"
+	onkeypress={(e) => {
+		if (e.key === 'Enter') goto('/');
+	}}
+>
+	<div class="justify-left ml-1 flex w-screen flex-col">
+		<p class="title z-4 mt-1 pb-2 font-[Industry] text-6xl text-transparent">Vex Notebook Helper</p>
+
+		<p class="mr-1.1 titleOutline absolute -z-1 mt-3 pb-2 font-[Industry] text-6xl">
+			Vex Notebook Helper
+		</p>
+		<p class="mr-1.1 titleOutline absolute -z-1 pb-2 font-[Industry] text-6xl">
+			Vex Notebook Helper
+		</p>
+
+		<div class="align-left justify-top -mt-1 ml-1">
+			<p class="otherTitle z-4 -mt-0.5 pb-2 font-[D-Din] text-3xl text-transparent">
+				for Google Slides
+			</p>
+		</div>
+	</div>
+	<img class="logo" src="notebookhelperlogo.png" width="125" alt="Vex Notebook Helper Logo" />
+</div>
+<div class="flex w-full flex-col items-center">
+	<button
+		class="codeButton text-bold mt-4 bg-[#ffe5b5] px-2 py-1 font-[D-Din] text-xl font-extrabold"
+	>
+		<a href="vexNotebookHelper.gs" download="vexNotebookHelper.gs"> Download Script </a>
+	</button>
+</div>
+
+<div class=" mt-2 ml-2 border-2 border-[#522f01] p-1 text-sm">
+	{@html highlightedCode}
+</div>
+
+<footer>
+	<a
+		href="https://uigalaxy.net"
+		target="_blank"
+		rel="noopener noreferrer"
+		class="watermark otherTitle mt-8 ml-2 w-full pl-1 text-center font-[D-Din] text-3xl font-extrabold text-transparent underline transition-all duration-300 hover:text-[32px] active:text-[30px]"
+	>
+		uigalaxy.net | 45434X Paradox
+	</a>
+	<h1 class="align-center mt-1 w-full text-center font-[D-Din] text-lg text-[#ffe5b5]">
+		check out my other projects <br />
+		<span class="underline transition-all duration-300 hover:text-white"
+			><a href="https://pid-tuner-gamma.vercel.app/" target="_blank" rel="noopener noreferrer"
+				>PID Tuner</a
+			></span
+		>
+	</h1>
+</footer>

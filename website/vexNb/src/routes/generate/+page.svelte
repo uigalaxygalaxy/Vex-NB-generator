@@ -51,6 +51,19 @@
 			top: 18
 		}
 	});
+	let ToCCoords = $state({
+		left: 43,
+		top: 71,
+		tolerance: {
+			left: 9,
+			top: 12
+		}
+	});
+
+	let ToCDimensions = $state({
+		rows: 22,
+		columns: 4
+	});
 
 	let highlightedCode = $state('');
 
@@ -138,17 +151,17 @@ the script also changes the page number elements btw
     }
 
     let ToCCoords = {
-        left: 43,
-        top: 71,
+        left: ${ToCCoords.left},
+        top: ${ToCCoords.top},
         tolerance: {
-            left: 9,
-            top: 12
+            left: ${ToCCoords.tolerance.left},
+            top: ${ToCCoords.tolerance.top}
         }
     }
 
     let ToCDimensions = { //how much row and column in each table of content page
-        rows: 22,
-        columns: 4
+        rows: ${ToCDimensions.rows},
+        columns: ${ToCDimensions.columns}
     }
 
     // If your TOC has different columns, change these. left to right starting at 0
@@ -344,6 +357,8 @@ the script also changes the page number elements btw
 		iterationCoords;
 		titleCoords;
 		pageNumberCoords;
+		ToCCoords;
+		ToCDimensions;
 		highlight();
 	});
 
@@ -499,6 +514,34 @@ the script also changes the page number elements btw
 		<Number bind:value={pageNumberCoords.tolerance.left} text=", " />
 		<Number
 			bind:value={pageNumberCoords.tolerance.top}
+			text="X (from left), Y (from top) - Element Tolerance"
+		/>
+	</div>
+</div>
+
+<div class="align-front justify-left mt-8 ml-4 flex w-screen flex-col">
+	<h1 class="otherTitle mt-1 font-[D-Din] text-xl font-extrabold text-transparent">
+		How much rows does your table of contents have?
+	</h1>
+	<Number bind:value={ToCDimensions.rows} text="rows" />
+</div>
+
+<div class="align-front justify-left mt-8 ml-4 flex w-screen flex-col">
+	<h1 class="otherTitle mt-1 font-[D-Din] text-xl font-extrabold text-transparent">
+		What are the coordinates of your table of contents?
+	</h1>
+	<div class="mt-2 flex flex-row gap-2">
+		<Number bind:value={ToCCoords.left} text=", " />
+		<Number
+			bind:value={ToCCoords.top}
+			text="X (from left), Y (from top) - Table of Contents Element"
+		/>
+	</div>
+	<div class="flex flex-row gap-2">
+		<span class="mt-1 ml-2 font-[D-Din] text-lg text-[#ffe5b5]">±</span>
+		<Number bind:value={ToCCoords.tolerance.left} text=", " />
+		<Number
+			bind:value={ToCCoords.tolerance.top}
 			text="X (from left), Y (from top) - Element Tolerance"
 		/>
 	</div>

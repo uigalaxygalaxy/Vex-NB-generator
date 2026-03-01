@@ -89,8 +89,8 @@
 	How to Use
 </h1>
 <h1 class="mt-1 ml-4 font-[D-Din] text-lg text-[#ffe5b5]">
-	Choose to generate your script (coming soon), or download the code and adjust the constants at the
-	top of the script! <br />
+	Choose to generate your script, or download the code and adjust the constants at the top of the
+	script! <br />
 
 	Run the script by going to Extensions > Apps Script, pasting the code in, and running the notebook
 	function. <br />
@@ -120,9 +120,10 @@
 		</div>
 		<div class="flex w-1/2 flex-col items-center">
 			<button
+				onclick={() => goto('/generate')}
 				class="codeButton text-bold mt-4 bg-[#ffe5b5] px-2 py-1 font-[D-Din] text-xl font-extrabold"
 			>
-				Generate Script (coming soon)
+				Generate Script
 			</button>
 		</div>
 	</div>

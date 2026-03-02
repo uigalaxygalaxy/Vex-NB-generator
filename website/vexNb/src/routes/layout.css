@@ -118,3 +118,7 @@ body {
 code {
     font-family: 'Mononoki';
 }
+
+h1 {
+    line-height: 36px;
+}

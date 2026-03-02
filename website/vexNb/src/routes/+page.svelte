@@ -92,8 +92,8 @@
 	Choose to generate your script, or download the code and adjust the constants at the top of the
 	script! <br />
 
-	Run the script by going to Extensions > Apps Script, pasting the code in, and running the notebook
-	function. <br />
+	On a copy of your notebook, run the script by going to Extensions > Apps Script, pasting the code
+	in, and running the notebook function. <br /><br />
 
 	In order to find the coordinates for each element, create a slide with JUST that element, and use
 	this code in Apps Script to log the coordinates:
@@ -106,7 +106,16 @@
 	slides to the top and ending after your test slides have been checked. <br />
 
 	You can then put these coordinates in the script! The tolerance is the amount of wiggle room
-	allowed for each element. I'd reccomend around 20.
+	allowed for each element. I'd reccomend around 20. <br /> <br />
+
+	Before you run the script, make sure you to check these:
+	<ul class="list-disc pl-8">
+		<li>
+			Copy and paste a lot of your Table of Contents pages, it will error if not enough are created
+		</li>
+		<li>The script will only track pages that have the page number element!</li>
+		<li>Your tolerances are high enough (if your notebook is goyslop)</li>
+	</ul>
 </h1>
 <div class="flex w-screen justify-center">
 	<div class="mb-16 flex w-1/2 justify-around">

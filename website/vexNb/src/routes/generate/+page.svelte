@@ -455,67 +455,61 @@ the script also changes the page number elements btw
 		What coordinates are your elements?
 	</h1>
 	{#if includeDate}
+		<h1 class="otherTitle -my-2 mt-4 font-[D-Din] text-xl font-extrabold text-transparent">
+			Date Element
+		</h1>
 		<div class="mt-2 flex flex-row gap-2">
 			<Number bind:value={dateCoords.left} text=", " />
-			<Number bind:value={dateCoords.top} text="X (from left), Y (from top) - Date Element" />
+			<Number bind:value={dateCoords.top} text="X (from left), Y (from top)" />
 		</div>
 		<div class="flex flex-row gap-2">
 			<span class="mt-1 ml-2 font-[D-Din] text-lg text-[#ffe5b5]">±</span>
 			<Number bind:value={dateCoords.tolerance.left} text=", " />
-			<Number
-				bind:value={dateCoords.tolerance.top}
-				text="X (from left), Y (from top) - Element Tolerance"
-			/>
+			<Number bind:value={dateCoords.tolerance.top} text="(Tolerance)" />
 		</div>
 	{/if}
 
 	{#if includeIteration}
+		<h1 class="otherTitle -my-2 mt-4 font-[D-Din] text-xl font-extrabold text-transparent">
+			Iteration/Subheading Element
+		</h1>
 		<div class="mt-2 flex flex-row gap-2">
 			<Number bind:value={iterationCoords.left} text=", " />
-			<Number
-				bind:value={iterationCoords.top}
-				text="X (from left), Y (from top) - Iteration/Subheading Element"
-			/>
+			<Number bind:value={iterationCoords.top} text="" />
 		</div>
 		<div class="flex flex-row gap-2">
 			<span class="mt-1 ml-2 font-[D-Din] text-lg text-[#ffe5b5]">±</span>
 			<Number bind:value={iterationCoords.tolerance.left} text=", " />
-			<Number
-				bind:value={iterationCoords.tolerance.top}
-				text="X (from left), Y (from top) - Element Tolerance"
-			/>
+			<Number bind:value={iterationCoords.tolerance.top} text="" />
 		</div>
 	{/if}
 
 	{#if includeTitle}
+		<h1 class="otherTitle -my-2 mt-4 font-[D-Din] text-xl font-extrabold text-transparent">
+			Title Element
+		</h1>
 		<div class="mt-2 flex flex-row gap-2">
 			<Number bind:value={titleCoords.left} text=", " />
-			<Number bind:value={titleCoords.top} text="X (from left), Y (from top) - Title Element" />
+			<Number bind:value={titleCoords.top} text="" />
 		</div>
 		<div class="flex flex-row gap-2">
 			<span class="mt-1 ml-2 font-[D-Din] text-lg text-[#ffe5b5]">±</span>
 			<Number bind:value={titleCoords.tolerance.left} text=", " />
-			<Number
-				bind:value={titleCoords.tolerance.top}
-				text="X (from left), Y (from top) - Element Tolerance"
-			/>
+			<Number bind:value={titleCoords.tolerance.top} text="" />
 		</div>
 	{/if}
 
+	<h1 class="otherTitle -my-2 mt-4 font-[D-Din] text-xl font-extrabold text-transparent">
+		Page Number Element
+	</h1>
 	<div class="mt-2 flex flex-row gap-2">
 		<Number bind:value={pageNumberCoords.left} text=", " />
-		<Number
-			bind:value={pageNumberCoords.top}
-			text="X (from left), Y (from top) - Page Number Element"
-		/>
+		<Number bind:value={pageNumberCoords.top} text="" />
 	</div>
 	<div class="flex flex-row gap-2">
 		<span class="mt-1 ml-2 font-[D-Din] text-lg text-[#ffe5b5]">±</span>
 		<Number bind:value={pageNumberCoords.tolerance.left} text=", " />
-		<Number
-			bind:value={pageNumberCoords.tolerance.top}
-			text="X (from left), Y (from top) - Element Tolerance"
-		/>
+		<Number bind:value={pageNumberCoords.tolerance.top} text="" />
 	</div>
 </div>
 
@@ -532,18 +526,12 @@ the script also changes the page number elements btw
 	</h1>
 	<div class="mt-2 flex flex-row gap-2">
 		<Number bind:value={ToCCoords.left} text=", " />
-		<Number
-			bind:value={ToCCoords.top}
-			text="X (from left), Y (from top) - Table of Contents Element"
-		/>
+		<Number bind:value={ToCCoords.top} text="X (from left), Y (from top)" />
 	</div>
 	<div class="flex flex-row gap-2">
 		<span class="mt-1 ml-2 font-[D-Din] text-lg text-[#ffe5b5]">±</span>
 		<Number bind:value={ToCCoords.tolerance.left} text=", " />
-		<Number
-			bind:value={ToCCoords.tolerance.top}
-			text="X (from left), Y (from top) - Element Tolerance"
-		/>
+		<Number bind:value={ToCCoords.tolerance.top} text="(Tolerance)" />
 	</div>
 </div>
 

@@ -19,6 +19,8 @@
 	let colorColumn = $state(0);
 	let pageNumberColumn = $state(0);
 
+	let skipHeadings = $state(true);
+
 	let pageNumberCoords = $state({
 		left: 532,
 		top: 0,
@@ -182,6 +184,8 @@ the script also changes the page number elements btw
     // it will chain it as well if the title includes <cont.>
     //
 
+	let skipHeadings = ${skipHeadings}; // leaves the first row in the table of contents for headings
+
 
 
 
@@ -260,7 +264,7 @@ the script also changes the page number elements btw
 
             if (!title) title = \`Couldn't find title :c\`;
             if (!date) date = \`Can't find ;-;\`;
-            if (!color) color = rgb(255, 255, 255);
+            if (!color) color = '';
             if (!iteration) iteration = \`Can't find :P\`;
             if (!slideID) slideID = \`g3c7d2831742_1_3\`;
 
@@ -296,12 +300,15 @@ the script also changes the page number elements btw
 
     }
     let pageChainConstructor = '';
+	if (skipHeadings) ToCDimensions.rows--;
     for (let i = 0; i < (Math.ceil(tableOfContents.length / ToCDimensions.rows)); i++) {
         SlidesApp.getActivePresentation().getSlides()[1 + i].getPageElements().forEach(element => {
             if (Math.abs(element.getLeft() - ToCCoords.left) < ToCCoords.tolerance.left && Math.abs(element.getTop() - ToCCoords.top) < ToCCoords.tolerance.top) {
                 if (element.asTable) {
                     let table = element.asTable();
                     for (let j = 0; j < ToCDimensions.rows; j++) {
+						let rowPointer = j;
+                        if (skipHeadings) rowPointer++;
                         let entry = tableOfContents[i * ToCDimensions.rows + j + 1];
                         if (entry) {
 
@@ -309,18 +316,18 @@ the script also changes the page number elements btw
                                 ? entry.pageStart.toString()
                                 : \`\${entry.pageStart}-\${entry.pageEnd}\`;
 
-                            table.getCell(j + 1, pageNumberColumn).getText().setText(pageString);
+                            table.getCell(skipHeadings, pageNumberColumn).getText().setText(pageString);
 
                             // Safety check for the color
                             if (entry.color && includeColor) {
                                 // .setSolidFill() accepts both a hex string OR a Color object
-                                table.getCell(j + 1, colorColumn).getFill().setSolidFill(entry.color);
+                                table.getCell(skipHeadings, colorColumn).getFill().setSolidFill(entry.color);
                             }
 
-                            if (includeTitle) table.getCell(j + 1, titleColumn).getText().setText(entry.title);
-                            if (includeColor) table.getCell(j + 1, titleColumn).getText().getTextStyle().setLinkUrl(\`#slide=id.\${entry.id}\`);
-                            if (includeIteration) table.getCell(j + 1, iterationColumn).getText().setText(entry.iteration);
-                            if (includeDate) table.getCell(j + 1, dateColumn).getText().setText(entry.date);
+                            if (includeTitle) table.getCell(skipHeadings, titleColumn).getText().setText(entry.title);
+                            if (includeColor) table.getCell(skipHeadings, titleColumn).getText().getTextStyle().setLinkUrl(\`#slide=id.\${entry.id}\`);
+                            if (includeIteration) table.getCell(skipHeadings, iterationColumn).getText().setText(entry.iteration);
+                            if (includeDate) table.getCell(skipHeadings, dateColumn).getText().setText(entry.date);
 
 
                             console.log(\`Page: \${entry.page}, Color: \${entry.color}, Title: \${entry.title}, Date: \${entry.date}\`);
@@ -359,6 +366,7 @@ the script also changes the page number elements btw
 		pageNumberCoords;
 		ToCCoords;
 		ToCDimensions;
+		skipHeadings;
 		highlight();
 	});
 
@@ -533,6 +541,13 @@ the script also changes the page number elements btw
 		<Number bind:value={ToCCoords.tolerance.left} text=", " />
 		<Number bind:value={ToCCoords.tolerance.top} text="(Tolerance)" />
 	</div>
+</div>
+
+<div class="align-front justify-left mt-8 ml-4 flex w-screen flex-col">
+	<h1 class="otherTitle mt-1 font-[D-Din] text-xl font-extrabold text-transparent">
+		Does your notebook have headers in the table of contents?
+	</h1>
+	<Check bind:checked={skipHeadings} text="Checking will skip a row for your headers." />
 </div>
 
 <h1 class="subHeading mt-8 ml-2 w-70 pl-1 font-[D-Din] text-3xl font-extrabold text-black">

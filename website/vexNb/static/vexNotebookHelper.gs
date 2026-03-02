@@ -113,6 +113,7 @@ the script also changes the page number elements btw
     // it will chain it as well if the title includes <cont.>
     //
 
+    let skipHeadings = true; // leaves the first row in the table of contents for headings
 
 
 
@@ -191,7 +192,7 @@ the script also changes the page number elements btw
 
             if (!title) title = `Couldn't find title :c`;
             if (!date) date = `Can't find ;-;`;
-            if (!color) color = rgb(255, 255, 255);
+            if (!color) color = '';
             if (!iteration) iteration = `Can't find :P`;
             if (!slideID) slideID = `g3c7d2831742_1_3`;
 
@@ -227,12 +228,15 @@ the script also changes the page number elements btw
 
     }
     let pageChainConstructor = '';
+    if (skipHeadings) ToCDimensions.rows--;
     for (let i = 0; i < (Math.ceil(tableOfContents.length / ToCDimensions.rows)); i++) {
         SlidesApp.getActivePresentation().getSlides()[1 + i].getPageElements().forEach(element => {
             if (Math.abs(element.getLeft() - ToCCoords.left) < ToCCoords.tolerance.left && Math.abs(element.getTop() - ToCCoords.top) < ToCCoords.tolerance.top) {
                 if (element.asTable) {
                     let table = element.asTable();
                     for (let j = 0; j < ToCDimensions.rows; j++) {
+                        let rowPointer = j;
+                        if (skipHeadings) rowPointer++;
                         let entry = tableOfContents[i * ToCDimensions.rows + j + 1];
                         if (entry) {
 
@@ -240,18 +244,18 @@ the script also changes the page number elements btw
                                 ? entry.pageStart.toString()
                                 : `${entry.pageStart}-${entry.pageEnd}`;
 
-                            table.getCell(j + 1, pageNumberColumn).getText().setText(pageString);
+                            table.getCell(skipHeadings, pageNumberColumn).getText().setText(pageString);
 
                             // Safety check for the color
                             if (entry.color && includeColor) {
                                 // .setSolidFill() accepts both a hex string OR a Color object
-                                table.getCell(j + 1, colorColumn).getFill().setSolidFill(entry.color);
+                                table.getCell(skipHeadings, colorColumn).getFill().setSolidFill(entry.color);
                             }
 
-                            if (includeTitle) table.getCell(j + 1, titleColumn).getText().setText(entry.title);
-                            if (includeColor) table.getCell(j + 1, titleColumn).getText().getTextStyle().setLinkUrl(`#slide=id.${entry.id}`);
-                            if (includeIteration) table.getCell(j + 1, iterationColumn).getText().setText(entry.iteration);
-                            if (includeDate) table.getCell(j + 1, dateColumn).getText().setText(entry.date);
+                            if (includeTitle) table.getCell(skipHeadings, titleColumn).getText().setText(entry.title);
+                            if (includeColor) table.getCell(skipHeadings, titleColumn).getText().getTextStyle().setLinkUrl(`#slide=id.${entry.id}`);
+                            if (includeIteration) table.getCell(skipHeadings, iterationColumn).getText().setText(entry.iteration);
+                            if (includeDate) table.getCell(skipHeadings, dateColumn).getText().setText(entry.date);
 
 
                             console.log(`Page: ${entry.page}, Color: ${entry.color}, Title: ${entry.title}, Date: ${entry.date}`);

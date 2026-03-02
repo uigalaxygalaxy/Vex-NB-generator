@@ -72,7 +72,28 @@
 	</ul>
 </h1>
 
-<h1 class="subHeading mt-8 ml-2 w-70 pl-1 font-[D-Din] text-3xl font-extrabold text-black">
+<div class="flex w-screen justify-center">
+	<div class="mb-8 flex w-1/2 justify-around">
+		<div class="flex w-1/2 flex-col items-center">
+			<button
+				onclick={() => goto('/code')}
+				class="codeButton text-bold mt-4 bg-[#ffe5b5] px-2 py-1 font-[D-Din] text-xl font-extrabold"
+			>
+				View/Download Script
+			</button>
+		</div>
+		<div class="flex w-1/2 flex-col items-center">
+			<button
+				onclick={() => goto('/generate')}
+				class="codeButton text-bold mt-4 bg-[#ffe5b5] px-2 py-1 font-[D-Din] text-xl font-extrabold"
+			>
+				Generate Script
+			</button>
+		</div>
+	</div>
+</div>
+
+<h1 class="subHeading ml-2 w-70 pl-1 font-[D-Din] text-3xl font-extrabold text-black">
 	Prerequisites
 </h1>
 <h1 class="mt-1 ml-4 font-[D-Din] text-lg text-[#ffe5b5]">
@@ -117,26 +138,7 @@
 		<li>Your tolerances are high enough (if your notebook is goyslop)</li>
 	</ul>
 </h1>
-<div class="flex w-screen justify-center">
-	<div class="mb-16 flex w-1/2 justify-around">
-		<div class="flex w-1/2 flex-col items-center">
-			<button
-				onclick={() => goto('/code')}
-				class="codeButton text-bold mt-4 bg-[#ffe5b5] px-2 py-1 font-[D-Din] text-xl font-extrabold"
-			>
-				View/Download Script
-			</button>
-		</div>
-		<div class="flex w-1/2 flex-col items-center">
-			<button
-				onclick={() => goto('/generate')}
-				class="codeButton text-bold mt-4 bg-[#ffe5b5] px-2 py-1 font-[D-Din] text-xl font-extrabold"
-			>
-				Generate Script
-			</button>
-		</div>
-	</div>
-</div>
+
 <footer>
 	<a
 		href="https://uigalaxy.net"

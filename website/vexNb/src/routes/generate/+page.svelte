@@ -299,7 +299,6 @@ the script also changes the page number elements btw
 
 
     }
-    let pageChainConstructor = '';
 	if (skipHeadings) ToCDimensions.rows--;
     for (let i = 0; i < (Math.ceil(tableOfContents.length / ToCDimensions.rows)); i++) {
         SlidesApp.getActivePresentation().getSlides()[1 + i].getPageElements().forEach(element => {
@@ -316,18 +315,18 @@ the script also changes the page number elements btw
                                 ? entry.pageStart.toString()
                                 : \`\${entry.pageStart}-\${entry.pageEnd}\`;
 
-                            table.getCell(skipHeadings, pageNumberColumn).getText().setText(pageString);
+                            table.getCell(rowPointer, pageNumberColumn).getText().setText(pageString);
 
                             // Safety check for the color
                             if (entry.color && includeColor) {
                                 // .setSolidFill() accepts both a hex string OR a Color object
-                                table.getCell(skipHeadings, colorColumn).getFill().setSolidFill(entry.color);
+                                table.getCell(rowPointer, colorColumn).getFill().setSolidFill(entry.color);
                             }
 
-                            if (includeTitle) table.getCell(skipHeadings, titleColumn).getText().setText(entry.title);
-                            if (includeColor) table.getCell(skipHeadings, titleColumn).getText().getTextStyle().setLinkUrl(\`#slide=id.\${entry.id}\`);
-                            if (includeIteration) table.getCell(skipHeadings, iterationColumn).getText().setText(entry.iteration);
-                            if (includeDate) table.getCell(skipHeadings, dateColumn).getText().setText(entry.date);
+                            if (includeTitle) table.getCell(rowPointer, titleColumn).getText().setText(entry.title);
+                            if (includeColor) table.getCell(rowPointer, titleColumn).getText().getTextStyle().setLinkUrl(\`#slide=id.\${entry.id}\`);
+                            if (includeIteration) table.getCell(rowPointer, iterationColumn).getText().setText(entry.iteration);
+                            if (includeDate) table.getCell(rowPointer, dateColumn).getText().setText(entry.date);
 
 
                             console.log(\`Page: \${entry.page}, Color: \${entry.color}, Title: \${entry.title}, Date: \${entry.date}\`);

@@ -372,6 +372,7 @@ the script also changes the page number elements btw
 	highlight();
 </script>
 
+
 <div
 	class="mb-4 flex w-screen justify-center hover:cursor-pointer"
 	onclick={() => goto('/')}

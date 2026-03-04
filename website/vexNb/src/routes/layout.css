@@ -46,7 +46,6 @@ body {
     color: #f8be71;
     transition: all 0.4s cubic-bezier(0, .77, .37, 1.18);
     margin-bottom: 0px;
-
 }
 
 .codeButton:hover {
@@ -54,6 +53,7 @@ body {
     color: #27221e;
     transform: scale(105%);
     border-color: #ffa52f;
+    cursor: pointer;
 }
 
 .codeButton:active {
@@ -75,6 +75,7 @@ body {
 
 .logo {
     position: relative;
+    width: 115px;
 }
 
 

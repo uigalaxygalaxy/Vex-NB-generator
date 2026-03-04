@@ -372,8 +372,9 @@ the script also changes the page number elements btw
 	highlight();
 </script>
 
+
 <div
-	class="mb-4 flex w-screen justify-center"
+	class="mb-4 flex w-screen justify-center hover:cursor-pointer"
 	onclick={() => goto('/')}
 	aria-label="Go back to home page"
 	role="button"

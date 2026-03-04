@@ -139,6 +139,21 @@
 	</ul>
 </h1>
 
+<h1 class="subHeading mt-8 mb-4 ml-2 w-70 pl-1 font-[D-Din] text-3xl font-extrabold text-black">
+	Video Explanation
+</h1>
+<iframe
+	class="ml-2"
+	width="560"
+	height="315"
+	src="https://www.youtube.com/embed/yyIiTA7R4lc?si=Or1wrEprpnwyp28H"
+	title="YouTube video player"
+	frameborder="0"
+	allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+	referrerpolicy="strict-origin-when-cross-origin"
+	allowfullscreen
+></iframe>
+
 <footer>
 	<a
 		href="https://uigalaxy.net"
